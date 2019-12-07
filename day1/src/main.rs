@@ -21,9 +21,17 @@ fn main() -> Result<(), ()> {
 }
 
 fn part1(input: &str) -> Result<(), ()> {
+    let mut total = 0;
+
     for line in input.lines() {
-    // Solution goes here 
+        let value: u32 = match line.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        total += value / 3 - 2;
     }
+    println!("Result: {}", total);
     Ok(())
 }
 
