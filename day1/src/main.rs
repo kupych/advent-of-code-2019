@@ -24,7 +24,7 @@ fn part1(input: &str) -> Result<(), ()> {
     let mut total = 0;
 
     for line in input.lines() {
-        let value: u32 = match line.trim().parse() {
+        let value: i32 = match line.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
@@ -36,8 +36,25 @@ fn part1(input: &str) -> Result<(), ()> {
 }
 
 fn part2(input: &str) -> Result<(), ()> {
+    let mut total = 0;
+
     for line in input.lines() {
-    // Solution goes here 
+        let value: i32 = match line.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        total += calculate_fuel_weight(value, 0);
     }
+
+    println!("Result: {}", total);
     Ok(())
+}
+
+fn calculate_fuel_weight(input: i32, total: i32) -> i32 {
+    let fuel = input / 3 - 2;
+    if fuel <= 0 {
+        return total;
+    }
+    return calculate_fuel_weight(fuel, fuel + total);
 }
